@@ -1,0 +1,39 @@
+07-12-2023 13:43:53.428 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent - Restarting due to 3 class path changes (0 additions, 0 deletions, 3 modifications)
+07-12-2023 13:43:53.450 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Stopping...
+07-12-2023 13:43:53.451 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5b4ff4c9]]
+07-12-2023 13:43:53.451 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Stopped.
+07-12-2023 13:43:53.464 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Pausing ProtocolHandler ["http-nio-8080"]
+07-12-2023 13:43:53.465 [Thread-5] INFO  o.a.catalina.core.StandardService.log - Stopping service [Tomcat]
+07-12-2023 13:43:53.468 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Destroying Spring FrameworkServlet 'dispatcherServlet'
+07-12-2023 13:43:53.472 [Thread-5] WARN  o.a.c.loader.WebappClassLoaderBase.log - The web application [ROOT] appears to have started a thread named [clientInboundChannel-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.8.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.8.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.8.1/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1061)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.8.1/java.lang.Thread.run(Thread.java:833)
+07-12-2023 13:43:53.473 [Thread-5] WARN  o.a.c.loader.WebappClassLoaderBase.log - The web application [ROOT] appears to have started a thread named [clientInboundChannel-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.8.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.8.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.8.1/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1061)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.8.1/java.lang.Thread.run(Thread.java:833)
+07-12-2023 13:43:53.474 [Thread-5] WARN  o.a.c.loader.WebappClassLoaderBase.log - The web application [ROOT] appears to have started a thread named [clientInboundChannel-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.8.1/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.8.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.8.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.8.1/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1061)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.8.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.8.1/java.lang.Thread.run(Thread.java:833)
+07-12-2023 13:43:53.476 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Stopping ProtocolHandler ["http-nio-8080"]
+07-12-2023 13:43:53.479 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Destroying ProtocolHandler ["http-nio-8080"]
+07-12-2023 13:43:53.482 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-12-2023 13:43:53.486 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+07-12-2023 13:43:53.494 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
