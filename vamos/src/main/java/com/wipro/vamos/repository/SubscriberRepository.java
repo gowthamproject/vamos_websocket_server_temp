@@ -3,12 +3,14 @@ package com.wipro.vamos.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.wipro.vamos.model.Subscriber;
+import com.wipro.vamos.entity.SubscriberEntity;
 
-public interface SubscriberRepository extends JpaRepository<Subscriber, Long> {
+@Repository
+public interface SubscriberRepository extends JpaRepository<SubscriberEntity, Long> {
 
-	List<Subscriber> findByStatus(String status);
+	List<SubscriberEntity> findByStatus(String status);
 
-	List<Subscriber> findAllByNodeId(String node_id);
+	List<SubscriberEntity> findByCore5GId(String node_id);
 }

@@ -3,12 +3,16 @@ package com.wipro.vamos.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.wipro.vamos.model.GNodeB;
+import com.wipro.vamos.entity.GNodeBEntity;
 
-public interface GNodeBRepository extends JpaRepository<GNodeB, Long> {
+@Repository
+public interface GNodeBRepository extends JpaRepository<GNodeBEntity, Long> {
 
-	List<GNodeB> findByStatus(String status);
+	List<GNodeBEntity> findByStatus(String status);
 
-	List<GNodeB> findAllByNodeId(String node_id);
+	List<GNodeBEntity> findByCore5GId(String core_id);
+
+	void deleteByIdIn(List<Long> gNodeBIds);
 }

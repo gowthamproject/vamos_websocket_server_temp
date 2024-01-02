@@ -3,9 +3,11 @@ package com.wipro.vamos.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.wipro.vamos.model.Throughput;
+import com.wipro.vamos.entity.ThroughputEntity;
 
-public interface ThroughputRepository extends JpaRepository<Throughput, String> {
-	List<Throughput> findAllByNodeId(String node_id);
+@Repository
+public interface ThroughputRepository extends JpaRepository<ThroughputEntity, String> {
+	List<ThroughputEntity> findAllByCore5GId(String core_id);
 }

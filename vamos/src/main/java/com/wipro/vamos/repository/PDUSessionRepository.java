@@ -3,11 +3,13 @@ package com.wipro.vamos.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.wipro.vamos.model.PDUSession;
+import com.wipro.vamos.entity.PDUSessionEntity;
 
-public interface PDUSessionRepository extends JpaRepository<PDUSession, String>{
+@Repository
+public interface PDUSessionRepository extends JpaRepository<PDUSessionEntity, String>{
 	
-	List<PDUSession> findAllByNodeId(String node_id);
+	List<PDUSessionEntity> findAllByCore5GId(String core_id);
 
 }

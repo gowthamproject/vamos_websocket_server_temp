@@ -1,36 +1,25 @@
 package com.wipro.vamos.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "pdu_session_tester")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PDUSession {
 
-	@Id
-	@Column(name = "id", nullable = false)
 	private long id;
 
-	@Column(name = "gnb_id", nullable = false)
-	private long gnb_id;
+	@Builder.Default
+	private int sessionCount = 0;
 
-	@Column(name = "supi", nullable = true)
-	private long supi;
+	private int msisdn;
 
-	@Column(name = "updated_time", nullable = false)
-	private String updated_time;
-
-	@Column(name = "node_id", nullable = false)
-	private String nodeId;
+	private Date updatedTime;
 
 }

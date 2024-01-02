@@ -6,30 +6,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.Throughput;
-import com.wipro.vamos.repository.ThroughputRepository;
-import com.wipro.vamos.response.ThroughputResponse;
+import com.wipro.vamos.service.ThrouhputService;
 
 @RestController
 @RequestMapping("/api/v1")
 public class ThroughputController {
 
 	@Autowired
-	ThroughputRepository throughputRepository;
+	ThrouhputService throuhputService;
 
-	@GetMapping(value = "/throuhput/nodes/{node_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ThroughputResponse getThroughputByNodeId(@PathVariable(value = "node_id") String node_id)
+	@GetMapping(value = "/throuhput/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public List<Throughput> getThroughputsByCoreId(@PathVariable(value = "core_id") String core_id)
 			throws ResourceNotFoundException {
-		List<Throughput> troughputs = throughputRepository.findAllByNodeId(node_id);
-		ThroughputResponse response = new ThroughputResponse();
-		response.setUplink(troughputs.get(0).getUplink());
-		response.setDownlink(troughputs.get(0).getDownlink());
-		response.setUpdate_time(troughputs.get(0).getUpdated_time());
+		return throuhputService.getThrouhputsByCoreId(core_id);
+	}
 
-		return response;
+	@GetMapping(value = "/throuhput/current/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public Throughput getCurrentThroughputByCoreId(@PathVariable(value = "core_id") String core_id)
+			throws ResourceNotFoundException {
+		return throuhputService.getThrouhputByCoreId(core_id);
+	}
+
+	@PostMapping("/saveThroughput")
+	public String saveThroughput(@RequestBody Throughput throughput) {
+		throuhputService.saveThroughput(throughput);
+		return "Throughput saved!!!";
 	}
 }

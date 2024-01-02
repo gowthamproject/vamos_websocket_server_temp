@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AlarmResponse {
 
-	Map<String, Map<String, Long>> alarmCountByStatusandSeverity;
+
+	private String core_id;
+	
+	private Map<String, Map<String, Long>> alarmCountByStatusandSeverity;
 
 }
