@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wipro.vamos.common.Constant;
 import com.wipro.vamos.common.Mapper;
 import com.wipro.vamos.entity.GNodeBEntity;
 import com.wipro.vamos.entity.LocationEntity;
@@ -25,11 +26,6 @@ public class LocationService {
 
 	public Location getLocationByGNodeBID(long gnb_id) throws ResourceNotFoundException {
 		LocationEntity locationEntity = locationRepository.findByGNodeBId(gnb_id);
-		/*
-		 * if (locationEntity == null) throw new
-		 * ResourceNotFoundException("location not found for this gnb_id :: " +
-		 * gnb_id);
-		 */
 		Location location = null;
 		if (locationEntity != null)
 			location = Mapper.locationEntityToModel(locationEntity);
@@ -37,12 +33,7 @@ public class LocationService {
 	}
 
 	public Location getLocationBySiteID(long site_id) throws ResourceNotFoundException {
-		LocationEntity locationEntity = locationRepository.findBySiteId(site_id);
-		/*
-		 * if (locationEntity == null) throw new
-		 * ResourceNotFoundException("location not found for this site_id :: " +
-		 * site_id);
-		 */
+		LocationEntity locationEntity = locationRepository.findByTypeAndSiteId(Constant.SITE_LOCATION, site_id);
 		Location location = null;
 		if (locationEntity != null)
 			location = Mapper.locationEntityToModel(locationEntity);
@@ -63,6 +54,18 @@ public class LocationService {
 		gNodeBEntity.setId(gnb_id);
 		locationEntity.setGNodeB(gNodeBEntity);
 		locationRepository.save(locationEntity);
+	}
+
+	public void deleteSiteLocation(Integer site_id) {
+		locationRepository.deleteBySiteId(site_id);
+	}
+
+	public void deleteGNodeBLocation(long gnb_id) {
+		locationRepository.deleteByGNodeBId(gnb_id);
+	}
+
+	public long getLocationCount() {
+		return locationRepository.count();
 	}
 
 }

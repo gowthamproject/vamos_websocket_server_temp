@@ -48,15 +48,15 @@ public class LocationEntity {
 	private long longitude;
 
 	@ManyToOne
-	@JoinColumn(name = "site_id", nullable = false)
+	@JoinColumn(name = "site_id")
 	private SiteEntity site;
 
 	@ManyToOne
-	@JoinColumn(name = "gnb_id", nullable = false)
+	@JoinColumn(name = "gnb_id")
 	private GNodeBEntity GNodeB;
 
 	@ManyToOne
-	@JoinColumn(name = "core_id", nullable = false)
+	@JoinColumn(name = "core_id")
 	private Core5GEntity core5G;
 
 }

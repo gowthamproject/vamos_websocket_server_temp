@@ -12,6 +12,7 @@ import com.wipro.vamos.entity.LocationEntity;
 import com.wipro.vamos.entity.PDUSessionEntity;
 import com.wipro.vamos.entity.SiteEntity;
 import com.wipro.vamos.entity.SubscriberEntity;
+import com.wipro.vamos.entity.SystemInformationEntity;
 import com.wipro.vamos.entity.ThroughputEntity;
 import com.wipro.vamos.model.Alarm;
 import com.wipro.vamos.model.CPE;
@@ -22,6 +23,7 @@ import com.wipro.vamos.model.Location;
 import com.wipro.vamos.model.PDUSession;
 import com.wipro.vamos.model.Site;
 import com.wipro.vamos.model.Subscriber;
+import com.wipro.vamos.model.SystemInformation;
 import com.wipro.vamos.model.Throughput;
 
 public class Mapper {
@@ -311,5 +313,48 @@ public class Mapper {
 		throughputEntity.setUpdatedTime(throughput.getUpdatedTime());
 		throughputEntity.setId(throughput.getId());
 		return throughputEntity;
+	}
+
+	public static SystemInformation systemInformationEntityToModel(SystemInformationEntity systemInformationEntity) {
+		SystemInformation systemInformation = new SystemInformation();
+		systemInformation.setAvailableDiskGB(systemInformationEntity.getAvailableDiskGB());
+		systemInformation.setAvailableMemoryGB(systemInformationEntity.getAvailableMemoryGB());
+		systemInformation.setCpuUtilizationPercentage(systemInformationEntity.getCpuUtilizationPercentage());
+		systemInformation.setDiskUsagePercentage(systemInformationEntity.getDiskUsagePercentage());
+		systemInformation.setHostName(systemInformationEntity.getHostName());
+		systemInformation.setId(systemInformationEntity.getId());
+		systemInformation.setIpAddress(systemInformationEntity.getIpAddress());
+		systemInformation.setMemoryUsagePercentage(systemInformationEntity.getMemoryUsagePercentage());
+		systemInformation.setNodeType(systemInformationEntity.getNodeType());
+		systemInformation.setTotalDiskGB(systemInformationEntity.getTotalDiskGB());
+		systemInformation.setTotalMemoryGB(systemInformationEntity.getTotalMemoryGB());
+		systemInformation.setUpdatedTime(systemInformationEntity.getUpdatedTime());
+		return systemInformation;
+	}
+
+	public static SystemInformationEntity systemInformationModelToEntity(SystemInformation systemInformation) {
+		SystemInformationEntity systemInformationEntity = new SystemInformationEntity();
+		systemInformationEntity.setAvailableDiskGB(systemInformation.getAvailableDiskGB());
+		systemInformationEntity.setAvailableMemoryGB(systemInformation.getAvailableMemoryGB());
+		systemInformationEntity.setCpuUtilizationPercentage(systemInformation.getCpuUtilizationPercentage());
+		systemInformationEntity.setDiskUsagePercentage(systemInformation.getDiskUsagePercentage());
+		systemInformationEntity.setHostName(systemInformation.getHostName());
+		systemInformationEntity.setId(systemInformation.getId());
+		systemInformationEntity.setIpAddress(systemInformation.getIpAddress());
+		systemInformationEntity.setMemoryUsagePercentage(systemInformation.getMemoryUsagePercentage());
+		systemInformationEntity.setNodeType(systemInformation.getNodeType());
+		systemInformationEntity.setTotalDiskGB(systemInformation.getTotalDiskGB());
+		systemInformationEntity.setTotalMemoryGB(systemInformation.getTotalMemoryGB());
+		systemInformationEntity.setUpdatedTime(systemInformation.getUpdatedTime());
+		return systemInformationEntity;
+	}
+
+	public static List<SystemInformation> systemInformationEntityToModelList(
+			List<SystemInformationEntity> systemInformationEntities) {
+		List<SystemInformation> systemInformationList = new ArrayList<SystemInformation>();
+		for (SystemInformationEntity throughputEntity : systemInformationEntities) {
+			systemInformationList.add(systemInformationEntityToModel(throughputEntity));
+		}
+		return systemInformationList;
 	}
 }

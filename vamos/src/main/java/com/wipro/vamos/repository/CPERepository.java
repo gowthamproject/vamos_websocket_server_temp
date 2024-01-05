@@ -13,4 +13,6 @@ public interface CPERepository extends JpaRepository<CPEEntity, Long> {
 	List<CPEEntity> findByStatus(String status);
 
 	List<CPEEntity> findByGNodeBId(long gnb_id);
+
+	void deleteByGNodeBId(Long gnb_id);
 }

@@ -19,7 +19,7 @@ public class PDUSessionService {
 
 	public PDUSession getPDUSessionStatusByCoreId(String core_id) {
 		List<PDUSessionEntity> pudSessionEntities = pduSessionRepository.findAllByCore5GId(core_id);
-		if(pudSessionEntities == null)
+		if(pudSessionEntities == null ||  pudSessionEntities.isEmpty())
 			return new PDUSession();
 		return Mapper.pduSessionEntityToModel(pduSessionRepository.findAllByCore5GId(core_id).get(0));
 	}

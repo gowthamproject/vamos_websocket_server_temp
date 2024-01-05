@@ -1,5 +1,6 @@
 package com.wipro.vamos.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wipro.vamos.common.Constant;
 import com.wipro.vamos.common.Mapper;
 import com.wipro.vamos.entity.SubscriberEntity;
 import com.wipro.vamos.exception.ResourceNotFoundException;
@@ -44,6 +46,15 @@ public class SubscriberService {
 				.collect(Collectors.groupingBy(Subscriber::getStatus, Collectors.counting()));
 		SubscriberResponse subscriberResponse = new SubscriberResponse();
 		subscriberResponse.setCore_id(core_id);
+
+		if (subscriberCountByStatusMap == null)
+			subscriberCountByStatusMap = new HashMap<String, Long>();
+
+		if (subscriberCountByStatusMap.get(Constant.CONNECTED) == null)
+			subscriberCountByStatusMap.put(Constant.CONNECTED, 0l);
+		if (subscriberCountByStatusMap.get(Constant.DISCONNECTED) == null)
+			subscriberCountByStatusMap.put(Constant.DISCONNECTED, 0l);
+
 		subscriberResponse.setSubscriberCountByStatus(subscriberCountByStatusMap);
 		return subscriberResponse;
 	}

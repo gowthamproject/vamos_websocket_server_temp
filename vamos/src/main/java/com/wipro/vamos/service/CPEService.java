@@ -14,7 +14,7 @@ import com.wipro.vamos.entity.GNodeBEntity;
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.CPE;
 import com.wipro.vamos.repository.CPERepository;
-import com.wipro.vamos.response.CPEResponse;
+import com.wipro.vamos.response.CPECount;
 
 @Service
 public class CPEService {
@@ -38,11 +38,11 @@ public class CPEService {
 		return Mapper.cpeEntityToModelList(cpeRepository.findByGNodeBId(gnb_id));
 	}
 
-	public CPEResponse getCPEStatusCountByGNodeBID(long gnb_id) {
+	public CPECount getCPEStatusCountByGNodeBID(long gnb_id) {
 		List<CPEEntity> cpeList = cpeRepository.findByGNodeBId(gnb_id);
 		Map<String, Long> cpeCountByStatusMap = cpeList.stream()
 				.collect(Collectors.groupingBy(CPEEntity::getStatus, Collectors.counting()));
-		CPEResponse cpeResponse = new CPEResponse();
+		CPECount cpeResponse = new CPECount();
 		cpeResponse.setGnb_id(gnb_id);
 		cpeResponse.setCpeCountByStatusMap(cpeCountByStatusMap);
 		return cpeResponse;
@@ -54,6 +54,11 @@ public class CPEService {
 		gNodeBEntity.setId(gnb_id);
 		cpeEntity.setGNodeB(gNodeBEntity);
 		cpeRepository.save(cpeEntity);
+	}
+
+	public void deleteCPEByGNodeB(Long gnb_id) {
+		cpeRepository.deleteByGNodeBId(gnb_id);
+		
 	}
 
 }

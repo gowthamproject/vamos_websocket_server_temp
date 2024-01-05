@@ -10,4 +10,13 @@ public class Constant {
 	public static final String ALARM_STATUS_OPEN = "Open";
 	public static final String ALARM_STATUS_CLOSED = "Closed";
 
+	public static final String SITE_LOCATION = "Site";
+	public static final String GNODEB_LOCATION = "gNB";
+	
+	public static final String CONNECTED = "Connected";
+	public static final String DISCONNECTED = "Disconnected";
+	
+	public static final String ACTIVE = "Active";
+	public static final String INACTIVE = "Inactive";
+	
 }

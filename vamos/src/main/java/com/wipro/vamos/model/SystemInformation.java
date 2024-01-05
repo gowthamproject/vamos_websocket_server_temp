@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SystemInfo {
+public class SystemInformation {
 
 	private long id;
 
@@ -36,5 +36,5 @@ public class SystemInfo {
 	private String availableDiskGB;
 
 	private String totalDiskGB;
-
+	
 }

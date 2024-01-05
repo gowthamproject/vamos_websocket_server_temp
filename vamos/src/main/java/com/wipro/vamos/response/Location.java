@@ -11,10 +11,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Location {
 	
-	private String latitude;
-	
-	private String longitude;
-	
-	private String region_state;
+	private int id;
 
+	private String type;
+
+	private String street;
+
+	private String regionState;
+
+	private String country;
+
+	private long zipcode;
+
+	private long latitude;
+
+	private long longitude;
 }

@@ -1,6 +1,6 @@
 package com.wipro.vamos.response;
 
-import java.util.Map;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GNodeBResponse {
+public class HierarchyResponse {
 
-	private String node_id;
+	private List<P5gNetworkEnterprise> p5gNetworkEnterprises;
 	
-	private Map<String, Long> gNodeBCountByStatusMap ;
 
 }

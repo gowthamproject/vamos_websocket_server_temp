@@ -11,4 +11,11 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Intege
 	LocationEntity findByGNodeBId(long gnb_id);
 
 	LocationEntity findBySiteId(long site_id);
+
+	void deleteBySiteId(Integer site_id);
+
+	void deleteByGNodeBId(long gnb_id);
+
+	LocationEntity findByTypeAndSiteId(String siteLocation, long site_id);
+
 }

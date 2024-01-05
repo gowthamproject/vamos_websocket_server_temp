@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class EnterpriseController {
 
 	@Autowired
 	EnterpriseService enterpriseService;
-	
+
 	@GetMapping(value = "/enterprises", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<Enterprise> getAllEnterprise() throws ResourceNotFoundException {
 		return enterpriseService.getAllEnterprise();
@@ -38,4 +39,8 @@ public class EnterpriseController {
 		return "Enterprise saved!!!";
 	}
 
+	@GetMapping("/enterprise/count")
+	public ResponseEntity<Long> getEnterpriseCount() {
+		return ResponseEntity.ok().body(enterpriseService.getEnterpriseCount());
+	}
 }

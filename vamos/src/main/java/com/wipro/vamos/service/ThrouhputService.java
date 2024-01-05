@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wipro.vamos.common.Mapper;
+import com.wipro.vamos.entity.Core5GEntity;
+import com.wipro.vamos.entity.ThroughputEntity;
 import com.wipro.vamos.model.Throughput;
 import com.wipro.vamos.repository.ThroughputRepository;
 
@@ -22,7 +24,11 @@ public class ThrouhputService {
 		return Mapper.throughputEntityToModel(throughputRepository.findAllByCore5GId(core_id).get(0));
 	}
 
-	public void saveThroughput(Throughput throughput) {
-		throughputRepository.save(Mapper.subscriberModelToEntity(throughput));
+	public void saveThroughput(String core_id, Throughput throughput) {
+		ThroughputEntity throuhputEntity = Mapper.subscriberModelToEntity(throughput);
+		Core5GEntity core5gEntity = new Core5GEntity();
+		core5gEntity.setId(core_id);
+		throuhputEntity.setCore5G(core5gEntity);
+		throughputRepository.save(throuhputEntity);
 	}
 }

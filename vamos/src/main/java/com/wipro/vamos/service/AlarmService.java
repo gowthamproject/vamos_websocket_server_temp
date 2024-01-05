@@ -16,7 +16,7 @@ import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.Alarm;
 import com.wipro.vamos.model.Core5G;
 import com.wipro.vamos.repository.AlarmRepository;
-import com.wipro.vamos.response.AlarmResponse;
+import com.wipro.vamos.response.AlarmCount;
 
 @Service
 public class AlarmService {
@@ -47,17 +47,28 @@ public class AlarmService {
 		return Mapper.mappingAlarmEntityToModelList(alarmRepository.findByCore5GId(core_id));
 	}
 
-	public AlarmResponse getAlarmCountByCoreID(String core_id) {
+	public AlarmCount getAlarmCountByCoreID(String core_id) {
 		List<AlarmEntity> alarms = alarmRepository.findByCore5GId(core_id);
-		AlarmResponse alarmResponse = new AlarmResponse();
+		if (alarms == null || alarms.isEmpty())
+			return new AlarmCount();
+
+		AlarmCount alarmCount = new AlarmCount();
+		alarmCount.setTotalAlarmCount(alarms.size());
+		Map<String, List<AlarmEntity>> openClosedAlarmMap = alarms.stream()
+				.collect(Collectors.groupingBy(AlarmEntity::getStatus));
+		alarmCount.setOpenedAlarmCount(openClosedAlarmMap.get(Constant.ALARM_STATUS_OPEN).size());
+		alarmCount.setClosedAlarmCount(openClosedAlarmMap.get(Constant.ALARM_STATUS_CLOSED).size());
+
 		Map<String, Map<String, Long>> alarmCountByStatusandSeverity = new HashMap<String, Map<String, Long>>();
-		Map<String, Long> statusMap = alarms.stream()
-				.collect(Collectors.groupingBy(AlarmEntity::getSeverity, Collectors.counting()));
-		alarmCountByStatusandSeverity.put("Open", statusMap);
-		alarmCountByStatusandSeverity.put("Closed", statusMap);
-		alarmResponse.setAlarmCountByStatusandSeverity(alarmCountByStatusandSeverity);
-		alarmResponse.setCore_id(core_id);
-		return alarmResponse;
+
+		for (String alarmStatus : openClosedAlarmMap.keySet()) {
+			Map<String, Long> statusMap = openClosedAlarmMap.get(alarmStatus).stream()
+					.collect(Collectors.groupingBy(AlarmEntity::getSeverity, Collectors.counting()));
+			alarmCountByStatusandSeverity.put(alarmStatus, statusMap);
+		}
+		alarmCount.setAlarmCountByStatusandSeverity(alarmCountByStatusandSeverity);
+		alarmCount.setCore_id(core_id);
+		return alarmCount;
 	}
 
 	public void saveAlarm(Alarm alarm) {
@@ -71,6 +82,8 @@ public class AlarmService {
 
 	public String getPeekAlarmSeverityBySiteId(int site_id) throws ResourceNotFoundException {
 		List<Core5G> core5gList = core5gService.getCore5GBySiteId(site_id);
+		if (core5gList == null || core5gList.isEmpty())
+			throw new ResourceNotFoundException("Alarm severity not found for this site id " + site_id);
 
 		List<String> coreIdList = core5gList.stream().map(core -> core.getCoreId()).collect(Collectors.toList());
 		long severityCount = 0;
@@ -85,11 +98,20 @@ public class AlarmService {
 		if (severityCount > 0)
 			return Constant.WARNING;
 
-		return Constant.NORMAL;	
+		return Constant.NORMAL;
 	}
 
 	public String getPeekAlarmSeverityByCoreId(String core_id) throws ResourceNotFoundException {
-		Map<String, Long> openAlarmSeverityCountMap = getAlarmCountByCoreID(core_id).getAlarmCountByStatusandSeverity()
+
+		AlarmCount alarmCount = getAlarmCountByCoreID(core_id);
+		if (alarmCount == null)
+			throw new ResourceNotFoundException("Alarm severity not found for this core_id " + core_id);
+
+		Map<String, Map<String, Long>> alarmCountMap = alarmCount.getAlarmCountByStatusandSeverity();
+		if (alarmCountMap == null)
+			throw new ResourceNotFoundException("Alarm severity not found for this core_id " + core_id);
+
+		Map<String, Long> openAlarmSeverityCountMap = alarmCount.getAlarmCountByStatusandSeverity()
 				.get(Constant.ALARM_STATUS_OPEN);
 		if (openAlarmSeverityCountMap.get(Constant.CRITICAL) > 0)
 			return Constant.CRITICAL;
@@ -99,6 +121,10 @@ public class AlarmService {
 			return Constant.WARNING;
 
 		return Constant.NORMAL;
+	}
+
+	public long getAlarmCount() {
+		return alarmRepository.count();
 	}
 
 }

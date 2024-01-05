@@ -1,7 +1,5 @@
 package com.wipro.vamos.response;
 
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CPEResponse {
+public class CPE {
 
-	private long gnb_id;
-	
-	private Map<String, Long> cpeCountByStatusMap ;
+	private long cpeId;
+
+	private String cpeName;
+
+	private String ipAddress;
+
+	private String status;
 
 }

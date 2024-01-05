@@ -1,5 +1,6 @@
 package com.wipro.vamos.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -8,13 +9,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wipro.vamos.common.Constant;
 import com.wipro.vamos.common.Mapper;
 import com.wipro.vamos.entity.Core5GEntity;
 import com.wipro.vamos.entity.GNodeBEntity;
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.GNodeB;
 import com.wipro.vamos.repository.GNodeBRepository;
-import com.wipro.vamos.response.GNodeBResponse;
+import com.wipro.vamos.response.GNodeBCount;
 
 @Service
 public class GNodeBService {
@@ -25,8 +27,11 @@ public class GNodeBService {
 	@Autowired
 	private LocationService locationService;
 
-	public List<GNodeBEntity> getAllGnodeB() {
-		return gNodeBRepository.findAll();
+	@Autowired
+	private CPEService cpeService;
+
+	public List<GNodeB> getAllGnodeB() {
+		return Mapper.gNodeBEntityToModelList(gNodeBRepository.findAll());
 	}
 
 	public GNodeB getGNodeBByID(long gnb_id) throws ResourceNotFoundException {
@@ -40,11 +45,20 @@ public class GNodeBService {
 		return Mapper.gNodeBEntityToModelList(gNodeBRepository.findByCore5GId(core_id));
 	}
 
-	public GNodeBResponse getGNodeBStatusCountByCoreId(String core_id) {
+	public GNodeBCount getGNodeBStatusCountByCoreId(String core_id) {
 		List<GNodeBEntity> gnbList = gNodeBRepository.findByCore5GId(core_id);
 		Map<String, Long> gNodeBCountByStatusMap = gnbList.stream()
 				.collect(Collectors.groupingBy(GNodeBEntity::getStatus, Collectors.counting()));
-		GNodeBResponse gNodeBResponse = new GNodeBResponse();
+		if (gNodeBCountByStatusMap == null)
+			gNodeBCountByStatusMap = new HashMap<String, Long>();
+
+		if (gNodeBCountByStatusMap.get(Constant.ACTIVE) == null)
+			gNodeBCountByStatusMap.put(Constant.ACTIVE, 0l);
+
+		if (gNodeBCountByStatusMap.get(Constant.INACTIVE) == null)
+			gNodeBCountByStatusMap.put(Constant.INACTIVE, 0l);
+
+		GNodeBCount gNodeBResponse = new GNodeBCount();
 		gNodeBResponse.setNode_id(core_id);
 		gNodeBResponse.setGNodeBCountByStatusMap(gNodeBCountByStatusMap);
 		return gNodeBResponse;
@@ -60,9 +74,14 @@ public class GNodeBService {
 			locationService.saveGNodeBLocation(gNodeB.getGnbId(), gNodeB.getLocation());
 	}
 
-	public void deleteGNodeBs(List<Long> gNodeBIds) {
-		gNodeBRepository.deleteByIdIn(gNodeBIds);
-		
+	public void deleteGNodeBs(Long gNodeBId) {
+		// locationService.deleteGNodeBLocation(gNodeBId);
+		// cpeService.deleteCPEByGNodeB(gNodeBId);
+		gNodeBRepository.deleteById(gNodeBId);
+	}
+
+	public long getGNodeBCount() {
+		return gNodeBRepository.count();
 	}
 
 }

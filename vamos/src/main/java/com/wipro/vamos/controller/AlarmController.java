@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.Alarm;
-import com.wipro.vamos.response.AlarmResponse;
+import com.wipro.vamos.response.AlarmCount;
 import com.wipro.vamos.service.AlarmService;
 
 @RestController
@@ -39,7 +39,7 @@ public class AlarmController {
 	}
 
 	@GetMapping(value = "/alarm/count/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public AlarmResponse getAlarmCountByCoreId(@PathVariable(value = "core_id") String core_id)
+	public AlarmCount getAlarmCountByCoreId(@PathVariable(value = "core_id") String core_id)
 			throws ResourceNotFoundException {
 		return alarmService.getAlarmCountByCoreID(core_id);
 
@@ -61,6 +61,11 @@ public class AlarmController {
 	public ResponseEntity<String> saveSite(@RequestBody Alarm alarm) {
 		alarmService.saveAlarm(alarm);
 		return ResponseEntity.ok().body("Alarm Added.!");
+	}
+
+	@GetMapping("/alarm/count")
+	public ResponseEntity<Long> getAlarmCount() {
+		return ResponseEntity.ok().body(alarmService.getAlarmCount());
 	}
 
 }

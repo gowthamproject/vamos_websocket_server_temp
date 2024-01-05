@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.CPE;
-import com.wipro.vamos.response.CPEResponse;
+import com.wipro.vamos.response.CPECount;
 import com.wipro.vamos.service.CPEService;
 
 @RestController
@@ -42,7 +42,7 @@ public class CPEController {
 	}
 
 	@GetMapping("/cpe/status/count/{gnb_id}")
-	public ResponseEntity<CPEResponse> getGNodeBStatusCountByNodeId(@PathVariable(value = "gnb_id") long gnb_id)
+	public ResponseEntity<CPECount> getGNodeBStatusCountByNodeId(@PathVariable(value = "gnb_id") long gnb_id)
 			throws ResourceNotFoundException {
 		return ResponseEntity.ok().body(cpeService.getCPEStatusCountByGNodeBID(gnb_id));
 	}

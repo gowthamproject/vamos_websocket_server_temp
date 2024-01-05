@@ -13,16 +13,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Site {
 
-	private String id;
+	private int siteId;
 
-	private String name;
+	private String siteName;
 
-	private String address;
-
-	private String latitude;
-
-	private String longitude;
-
+	private Location location;
+	
+	private String peekAlarmSeverity;
+	
 	private List<Core5G> core5gs;
 
 }

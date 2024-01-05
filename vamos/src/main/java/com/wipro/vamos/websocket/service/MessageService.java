@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Service;
 
-import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.PDUSession;
 import com.wipro.vamos.model.Throughput;
-import com.wipro.vamos.response.AlarmResponse;
-import com.wipro.vamos.response.GNodeBResponse;
+import com.wipro.vamos.response.AlarmCount;
+import com.wipro.vamos.response.GNodeBCount;
 import com.wipro.vamos.response.SubscriberResponse;
 import com.wipro.vamos.service.AlarmService;
 import com.wipro.vamos.service.GNodeBService;
@@ -34,7 +33,7 @@ public class MessageService {
 	public SimpMessageSendingOperations messagingTemplate;
 
 	public void processAndSendMessage_GNodeB(String core_id) {
-		GNodeBResponse gNodeBResponse = gNodeBService.getGNodeBStatusCountByCoreId(core_id);
+		GNodeBCount gNodeBResponse = gNodeBService.getGNodeBStatusCountByCoreId(core_id);
 		System.out.println("Sending message to client -- /topic/gnodeb : " + gNodeBResponse);
 		messagingTemplate.convertAndSend("/topic/gnodeb", gNodeBResponse);
 	}
@@ -58,7 +57,7 @@ public class MessageService {
 	}
 
 	public void processAndSendMessage_Alarm(String core_id) {
-		AlarmResponse alarmResponse = alarmService.getAlarmCountByCoreID(core_id);
+		AlarmCount alarmResponse = alarmService.getAlarmCountByCoreID(core_id);
 		System.out.println("Sending message to client -- /topic/alarm : " + alarmResponse.toString());
 		messagingTemplate.convertAndSend("/topic/alarm", alarmResponse);
 	}

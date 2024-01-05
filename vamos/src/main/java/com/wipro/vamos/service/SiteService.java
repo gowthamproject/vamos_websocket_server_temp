@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wipro.vamos.common.Mapper;
+import com.wipro.vamos.entity.EnterpriseEntity;
 import com.wipro.vamos.entity.SiteEntity;
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.Location;
@@ -34,8 +35,11 @@ public class SiteService {
 		return site;
 	}
 
-	public void saveSite(Site site) {
+	public void saveSite(int enterprise_id, Site site) {
 		SiteEntity siteEntity = Mapper.siteModelToEntity(site);
+		EnterpriseEntity enterpriseEntity = new EnterpriseEntity();
+		enterpriseEntity.setId(enterprise_id);
+		siteEntity.setEnterprise(enterpriseEntity);
 		siteRepository.save(siteEntity);
 		if (site.getLocation() != null)
 			locationService.saveSiteLocation(site.getSiteId(), site.getLocation());
@@ -51,6 +55,10 @@ public class SiteService {
 			}
 		}
 		return siteList;
+	}
+
+	public List<Site> getSiteByEnterpriseId(int enterprise_id) {
+		return Mapper.siteEntityToModelList(siteRepository.findByEnterpriseId(enterprise_id));
 	}
 
 }

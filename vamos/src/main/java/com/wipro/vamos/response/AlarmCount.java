@@ -11,11 +11,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AlarmResponse {
-
+public class AlarmCount {
 
 	private String core_id;
-	
-	private Map<String, Map<String, Long>> alarmCountByStatusandSeverity;
+
+	private long totalAlarmCount = 0;
+
+	private long openedAlarmCount = 0;
+
+	private long closedAlarmCount = 0;
+
+	private Map<String, Map<String, Long>> alarmCountByStatusandSeverity = null;
 
 }

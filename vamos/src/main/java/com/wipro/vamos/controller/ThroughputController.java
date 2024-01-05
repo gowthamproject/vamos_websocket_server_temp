@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wipro.vamos.exception.ResourceNotFoundException;
@@ -35,8 +36,8 @@ public class ThroughputController {
 	}
 
 	@PostMapping("/saveThroughput")
-	public String saveThroughput(@RequestBody Throughput throughput) {
-		throuhputService.saveThroughput(throughput);
+	public String saveThroughput(@RequestParam(name="core_id")String core_id, @RequestBody Throughput throughput) {
+		throuhputService.saveThroughput(core_id, throughput);
 		return "Throughput saved!!!";
 	}
 }

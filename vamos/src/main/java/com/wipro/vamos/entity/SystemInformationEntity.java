@@ -16,15 +16,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "SystemInfo")
+@Table(name = "SystemInformation")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SystemInfoEntity {
+public class SystemInformationEntity {
 
 	@Id
-	@Column(name = "alarm_id", nullable = false)
+	@Column(name = "id", nullable = false)
 	private long id;
 
 	@Column(name = "host_name", nullable = false)

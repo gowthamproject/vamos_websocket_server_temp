@@ -12,17 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Core5G {
-	
-	private String id;
-	
+
+	private String coreId;
+
 	private String name;
-	
-	private String status;
-	
+
+	private String discoveryStatus;
+
 	private String endpoint;
+
+	private String apikey;
 	
-	private String apiKey;
+	private String peekAlarmSeverity;
 	
+	private AlarmCount alarmCount;
+
 	private List<GNodeB> gNodeBs;
 
 }

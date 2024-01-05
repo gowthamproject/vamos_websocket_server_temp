@@ -1,6 +1,6 @@
 package com.wipro.vamos.response;
 
-import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Enterprise {
+public class CPECount {
 
-	private List<P5gNetworkEnterprise> p5gNetworkEnterprises;
+	private long gnb_id;
 	
+	private Map<String, Long> cpeCountByStatusMap ;
 
 }
