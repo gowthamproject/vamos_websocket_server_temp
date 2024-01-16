@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.wipro.vamos.common.Constant;
 import com.wipro.vamos.common.Mapper;
+import com.wipro.vamos.entity.Core5GEntity;
 import com.wipro.vamos.entity.SubscriberEntity;
 import com.wipro.vamos.exception.ResourceNotFoundException;
 import com.wipro.vamos.model.Subscriber;
@@ -59,8 +60,17 @@ public class SubscriberService {
 		return subscriberResponse;
 	}
 
-	public void saveSubscriber(Subscriber subscriber) {
-		subscriberRepository.save(Mapper.subscriberModelToEntity(subscriber));
+	public void saveSubscriber(String core_id, Subscriber subscriber) {
+
+		SubscriberEntity subscriberEntity = Mapper.subscriberModelToEntity(subscriber);
+		Core5GEntity core5gEntity = new Core5GEntity();
+		core5gEntity.setId(core_id);
+		subscriberEntity.setCore5G(core5gEntity);
+		subscriberRepository.save(subscriberEntity);
+	}
+
+	public void deleteGNodeBs(Long subscriber_id) {
+		subscriberRepository.deleteById(subscriber_id);
 	}
 
 }

@@ -61,4 +61,8 @@ public class SiteService {
 		return Mapper.siteEntityToModelList(siteRepository.findByEnterpriseId(enterprise_id));
 	}
 
+	public long getSitecount() {
+		return siteRepository.count();
+	}
+
 }

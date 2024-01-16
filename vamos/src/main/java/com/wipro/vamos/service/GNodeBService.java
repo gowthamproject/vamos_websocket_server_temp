@@ -52,11 +52,11 @@ public class GNodeBService {
 		if (gNodeBCountByStatusMap == null)
 			gNodeBCountByStatusMap = new HashMap<String, Long>();
 
-		if (gNodeBCountByStatusMap.get(Constant.ACTIVE) == null)
-			gNodeBCountByStatusMap.put(Constant.ACTIVE, 0l);
+		if (gNodeBCountByStatusMap.get(Constant.CONNECTED) == null)
+			gNodeBCountByStatusMap.put(Constant.CONNECTED, 0l);
 
-		if (gNodeBCountByStatusMap.get(Constant.INACTIVE) == null)
-			gNodeBCountByStatusMap.put(Constant.INACTIVE, 0l);
+		if (gNodeBCountByStatusMap.get(Constant.DISCONNECTED) == null)
+			gNodeBCountByStatusMap.put(Constant.DISCONNECTED, 0l);
 
 		GNodeBCount gNodeBResponse = new GNodeBCount();
 		gNodeBResponse.setNode_id(core_id);
@@ -67,7 +67,7 @@ public class GNodeBService {
 	public void saveGNodeB(String core_id, GNodeB gNodeB) {
 		GNodeBEntity gNodeBEntity = Mapper.gNodeBModelToEntity(gNodeB);
 		Core5GEntity core5gEntity = new Core5GEntity();
-		core5gEntity.setId(core_id);
+		core5gEntity.setId(core_id); 
 		gNodeBEntity.setCore5G(core5gEntity);
 		gNodeBRepository.save(gNodeBEntity);
 		if (gNodeB.getLocation() != null)

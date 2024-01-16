@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,9 +58,16 @@ public class AlarmController {
 		return alarmService.getPeekAlarmSeverityByCoreId(core_id);
 	}
 
-	@PostMapping("/saveAlarm")
-	public ResponseEntity<String> saveSite(@RequestBody Alarm alarm) {
+	@PostMapping("/alarm/saveAlarm")
+	public ResponseEntity<String> saveAlarm(@RequestBody Alarm alarm) {
 		alarmService.saveAlarm(alarm);
+		return ResponseEntity.ok().body("Alarm Added.!");
+	}
+
+	@PostMapping("/alarm/saveAlarms")
+	public ResponseEntity<String> saveAlarms(@RequestBody List<Alarm> alarms) {
+		for (Alarm alarm : alarms)
+			alarmService.saveAlarm(alarm);
 		return ResponseEntity.ok().body("Alarm Added.!");
 	}
 
@@ -67,5 +75,19 @@ public class AlarmController {
 	public ResponseEntity<Long> getAlarmCount() {
 		return ResponseEntity.ok().body(alarmService.getAlarmCount());
 	}
+
+	@PutMapping("/alarm/updateAlarm")
+	public ResponseEntity<String> updateAlarm(@RequestBody Alarm alarm) {
+		alarmService.updateAlarm(alarm);
+		return ResponseEntity.ok().body("Alarm Updated.!");
+	}
+
+	/*
+	 * @GetMapping(value = "/alarm/peekseverity/node/filter", produces = {
+	 * MediaType.APPLICATION_JSON_VALUE }) public Page<AlarmEntity>
+	 * filterAlarms(@RequestParam(name = "severity") String severity) throws
+	 * ResourceNotFoundException { return alarmService.filterAlarms(severity, 0d,
+	 * 0d, 1, 5, "core5GId"); }
+	 */
 
 }

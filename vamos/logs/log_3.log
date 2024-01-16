@@ -1,25 +1,5 @@
-05-01-2024 15:00:33.445 [http-nio-8080-exec-3] INFO  o.s.api.AbstractOpenApiResource.getOpenApi - Init duration for springdoc-openapi is: 939 ms
-05-01-2024 15:01:31.739 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats.lambda$initLoggingTask$0 - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
-05-01-2024 15:04:33.477 [background-preinit] INFO  o.h.validator.internal.util.Version.<clinit> - HV000001: Hibernate Validator 8.0.1.Final
-05-01-2024 15:04:33.538 [restartedMain] INFO  com.wipro.vamos.VamosApplication.logStarting - Starting VamosApplication using Java 17.0.8.1 with PID 15744 (D:\vamos\vamos - test\target\classes started by Gowri in D:\vamos\vamos - test)
-05-01-2024 15:04:33.540 [restartedMain] INFO  com.wipro.vamos.VamosApplication.logStartupProfileInfo - The following 1 profile is active: "dev"
-05-01-2024 15:04:33.609 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-05-01-2024 15:04:33.610 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor.logTo - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-05-01-2024 15:04:34.866 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-05-01-2024 15:04:34.976 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 94 ms. Found 11 JPA repository interfaces.
-05-01-2024 15:04:36.084 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
-05-01-2024 15:04:36.095 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-8080"]
-05-01-2024 15:04:36.098 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
-05-01-2024 15:04:36.099 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/10.1.15]
-05-01-2024 15:04:36.224 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
-05-01-2024 15:04:36.225 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 2614 ms
-05-01-2024 15:04:36.474 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
-05-01-2024 15:04:36.559 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate ORM core version 6.2.13.Final
-05-01-2024 15:04:36.564 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000406: Using bytecode reflection optimizer
-05-01-2024 15:04:36.972 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo.addTransformer - No LoadTimeWeaver setup: ignoring JPA class transformer
-05-01-2024 15:04:37.026 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
-05-01-2024 15:04:39.335 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool.checkFailFast - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19da6ff3
-05-01-2024 15:04:39.338 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
-05-01-2024 15:04:39.470 [restartedMain] WARN  org.hibernate.orm.deprecation.constructDialect - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-05-01-2024 15:04:39.472 [restartedMain] WARN  org.hibernate.orm.deprecation.logSelectedDialect - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-05-01-2024 15:04:40.952 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+12-01-2024 16:26:46.315 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+12-01-2024 16:26:46.319 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+12-01-2024 16:26:46.319 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 0 ms
+12-01-2024 16:26:47.712 [http-nio-8080-exec-3] INFO  o.s.api.AbstractOpenApiResource.getOpenApi - Init duration for springdoc-openapi is: 1124 ms
+12-01-2024 16:27:21.566 [MessageBroker-1] INFO  o.s.w.s.c.WebSocketMessageBrokerStats.lambda$initLoggingTask$0 - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]

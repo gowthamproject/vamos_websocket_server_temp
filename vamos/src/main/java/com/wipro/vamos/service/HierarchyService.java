@@ -63,69 +63,69 @@ public class HierarchyService {
 				Location siteLocation;
 				try {
 					siteLocation = locationService.getLocationBySiteID(site.getSiteId());
+					siteResponse.setLocation(castLoation(siteLocation));
 				} catch (ResourceNotFoundException e) {
-					continue;
 				}
-				siteResponse.setLocation(castLoation(siteLocation));
-
 				List<Core5G> core5gList;
+				List<com.wipro.vamos.response.Core5G> core5gResponseList = new ArrayList<>();
 				try {
 					core5gList = core5gService.getCore5GBySiteId(site.getSiteId());
+					for (Core5G core5g : core5gList) {
+						core5gResponse = new com.wipro.vamos.response.Core5G();
+						core5gResponse.setApikey(core5g.getApikey());
+						core5gResponse.setCoreId(core5g.getCoreId());
+						core5gResponse.setDiscoveryStatus(core5g.getDiscoveryStatus());
+						core5gResponse.setEndpoint(core5g.getEndpoint());
+						core5gResponse.setName(core5g.getName());
+
+						List<GNodeB> gNodeBList = null;
+						List<com.wipro.vamos.response.GNodeB> gNodeBResponseList = new ArrayList<>();
+						try {
+							gNodeBList = gNodeBService.getGNodeBByCoreID(core5g.getCoreId());
+							for (GNodeB gNodeB : gNodeBList) {
+								gNodeBResponse = new com.wipro.vamos.response.GNodeB();
+								gNodeBResponse.setGnbId(gNodeB.getGnbId());
+								gNodeBResponse.setGnbName(gNodeB.getGnbName());
+								gNodeBResponse.setIpAddress(gNodeB.getIpAddress());
+								gNodeBResponse.setPlmnId(gNodeB.getPlmnId());
+								gNodeBResponse.setStatus(gNodeB.getStatus());
+								Location gNodeBlocation = null;
+								try {
+									gNodeBlocation = locationService.getLocationByGNodeBID(gNodeB.getGnbId());
+								} catch (ResourceNotFoundException e) {
+								}
+								gNodeBResponse.setLocation(castLoation(gNodeBlocation));
+
+								List<CPE> cpeList = null;
+								List<com.wipro.vamos.response.CPE> cpeResponseList = new ArrayList<>();
+								try {
+									cpeList = cpeService.getCPEByGNodeBID(gNodeB.getGnbId());
+									for (CPE cpe : cpeList) {
+										cpeResponse = new com.wipro.vamos.response.CPE();
+										cpeResponse.setCpeId(cpe.getCpeId());
+										cpeResponse.setCpeName(cpe.getCpeName());
+										cpeResponse.setIpAddress(cpe.getIpAddress());
+										cpeResponse.setStatus(cpe.getStatus());
+										cpeResponseList.add(cpeResponse);
+									}
+								} catch (ResourceNotFoundException e) {
+								}
+								gNodeBResponse.setCpes(cpeResponseList);
+								gNodeBResponseList.add(gNodeBResponse);
+							}
+						} catch (ResourceNotFoundException e) {
+							e.printStackTrace();
+						}
+						core5gResponse.setGNodeBs(gNodeBResponseList);
+						try {
+							core5gResponse.setPeekAlarmSeverity(
+									alarmService.getPeekAlarmSeverityByCoreId(core5g.getCoreId()));
+						} catch (ResourceNotFoundException e) {
+						}
+						core5gResponse.setAlarmCount(alarmService.getAlarmCountByCoreID(core5g.getCoreId()));
+						core5gResponseList.add(core5gResponse);
+					}
 				} catch (ResourceNotFoundException e) {
-					continue;
-				}
-				List<com.wipro.vamos.response.Core5G> core5gResponseList = new ArrayList<>();
-				for (Core5G core5g : core5gList) {
-					core5gResponse = new com.wipro.vamos.response.Core5G();
-					core5gResponse.setApikey(core5g.getApikey());
-					core5gResponse.setCoreId(core5g.getCoreId());
-					core5gResponse.setDiscoveryStatus(core5g.getDiscoveryStatus());
-					core5gResponse.setEndpoint(core5g.getEndpoint());
-					core5gResponse.setName(core5g.getName());
-
-					List<GNodeB> gNodeBList = null;
-					try {
-						gNodeBList = gNodeBService.getGNodeBByCoreID(core5g.getCoreId());
-					} catch (ResourceNotFoundException e) {
-						e.printStackTrace();
-					}
-					List<com.wipro.vamos.response.GNodeB> gNodeBResponseList = new ArrayList<>();
-					for (GNodeB gNodeB : gNodeBList) {
-						gNodeBResponse = new com.wipro.vamos.response.GNodeB();
-						gNodeBResponse.setGnbId(gNodeB.getGnbId());
-						gNodeBResponse.setGnbName(gNodeB.getGnbName());
-						gNodeBResponse.setIpAddress(gNodeB.getIpAddress());
-						gNodeBResponse.setPlmnId(gNodeB.getPlmnId());
-						gNodeBResponse.setStatus(gNodeB.getStatus());
-						Location gNodeBlocation = null;
-						try {
-							gNodeBlocation = locationService.getLocationByGNodeBID(gNodeB.getGnbId());
-						} catch (ResourceNotFoundException e) {
-						}
-						gNodeBResponse.setLocation(castLoation(gNodeBlocation));
-
-						List<CPE> cpeList = null;
-						try {
-							cpeList = cpeService.getCPEByGNodeBID(gNodeB.getGnbId());
-						} catch (ResourceNotFoundException e) {
-						}
-						List<com.wipro.vamos.response.CPE> cpeResponseList = new ArrayList<>();
-						for (CPE cpe : cpeList) {
-							cpeResponse = new com.wipro.vamos.response.CPE();
-
-							cpeResponseList.add(cpeResponse);
-						}
-						gNodeBResponse.setCpes(cpeResponseList);
-						gNodeBResponseList.add(gNodeBResponse);
-					}
-					core5gResponse.setGNodeBs(gNodeBResponseList);
-					try {
-						core5gResponse
-								.setPeekAlarmSeverity(alarmService.getPeekAlarmSeverityByCoreId(core5g.getCoreId()));
-					} catch (ResourceNotFoundException e) {
-					}
-					core5gResponse.setAlarmCount(alarmService.getAlarmCountByCoreID(core5g.getCoreId()));
-					core5gResponseList.add(core5gResponse);
 				}
 				siteResponse.setCore5gs(core5gResponseList);
 				siteResponseList.add(siteResponse);

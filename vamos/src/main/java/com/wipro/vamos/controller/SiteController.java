@@ -39,10 +39,16 @@ public class SiteController {
 	public List<Site> getAllSites() throws ResourceNotFoundException {
 		return siteService.getAllSite();
 	}
-	
+
 	@GetMapping(value = "/site/{enterprise_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<Site> getSiteByEnterpriseId(@PathVariable(name = "enterprise_id") int enterprise_id) throws ResourceNotFoundException {
+	public List<Site> getSiteByEnterpriseId(@PathVariable(name = "enterprise_id") int enterprise_id)
+			throws ResourceNotFoundException {
 		return siteService.getSiteByEnterpriseId(enterprise_id);
+	}
+
+	@GetMapping(value = "/site/count", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public long getSitecount() throws ResourceNotFoundException {
+		return siteService.getSitecount();
 	}
 
 	@PostMapping("/site/saveSite")

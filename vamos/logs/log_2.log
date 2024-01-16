@@ -1,9 +1,12 @@
-05-01-2024 15:04:44.910 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
-05-01-2024 15:04:46.079 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-05-01-2024 15:04:47.334 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
-05-01-2024 15:04:47.350 [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-8080"]
-05-01-2024 15:04:47.386 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
-05-01-2024 15:04:47.389 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Starting...
-05-01-2024 15:04:47.391 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7ee672cc]]
-05-01-2024 15:04:47.392 [restartedMain] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Started.
-05-01-2024 15:04:47.404 [restartedMain] INFO  com.wipro.vamos.VamosApplication.logStarted - Started VamosApplication in 14.342 seconds (process running for 15.41)
+12-01-2024 16:42:20.324 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.onApplicationEvent - Restarting due to 4 class path changes (3 additions, 0 deletions, 1 modification)
+12-01-2024 16:42:20.331 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Stopping...
+12-01-2024 16:42:20.331 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38ad95d4]]
+12-01-2024 16:42:20.332 [Thread-5] INFO  o.s.m.s.b.SimpleBrokerMessageHandler.info - Stopped.
+12-01-2024 16:42:20.350 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Pausing ProtocolHandler ["http-nio-8080"]
+12-01-2024 16:42:20.353 [Thread-5] INFO  o.a.catalina.core.StandardService.log - Stopping service [Tomcat]
+12-01-2024 16:42:20.354 [Thread-5] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Destroying Spring FrameworkServlet 'dispatcherServlet'
+12-01-2024 16:42:20.359 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Stopping ProtocolHandler ["http-nio-8080"]
+12-01-2024 16:42:20.364 [Thread-5] INFO  o.a.coyote.http11.Http11NioProtocol.log - Destroying ProtocolHandler ["http-nio-8080"]
+12-01-2024 16:42:20.371 [Thread-5] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+12-01-2024 16:42:20.377 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+12-01-2024 16:42:20.393 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.

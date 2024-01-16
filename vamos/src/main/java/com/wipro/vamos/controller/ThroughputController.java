@@ -23,21 +23,28 @@ public class ThroughputController {
 	@Autowired
 	ThrouhputService throuhputService;
 
-	@GetMapping(value = "/throuhput/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(value = "/throughput/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<Throughput> getThroughputsByCoreId(@PathVariable(value = "core_id") String core_id)
 			throws ResourceNotFoundException {
 		return throuhputService.getThrouhputsByCoreId(core_id);
 	}
 
-	@GetMapping(value = "/throuhput/current/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(value = "/throughput/current/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Throughput getCurrentThroughputByCoreId(@PathVariable(value = "core_id") String core_id)
 			throws ResourceNotFoundException {
 		return throuhputService.getThrouhputByCoreId(core_id);
 	}
 
-	@PostMapping("/saveThroughput")
+	@PostMapping("/throughput/saveThroughput")
 	public String saveThroughput(@RequestParam(name="core_id")String core_id, @RequestBody Throughput throughput) {
 		throuhputService.saveThroughput(core_id, throughput);
+		return "Throughput saved!!!";
+	}
+	
+	@PostMapping("/throughput/saveThroughputdata")
+	public String saveThroughput(@RequestParam(name="core_id")String core_id, @RequestBody List<Throughput> throughputs) {
+		for (Throughput throughput : throughputs)
+			throuhputService.saveThroughput(core_id, throughput);
 		return "Throughput saved!!!";
 	}
 }

@@ -58,7 +58,7 @@ public class Mapper {
 		alarm.setSeverity(alarmEntity.getSeverity());
 		alarm.setSpecificProblem(alarmEntity.getSpecificProblem());
 		alarm.setStatus(alarmEntity.getStatus());
-		alarm.setUpdatedTime(alarm.getUpdatedTime());
+		alarm.setUpdatedTime(alarmEntity.getUpdatedTime());
 		alarm.setCoreId(alarmEntity.getCore5G().getId());
 		return alarm;
 	}
@@ -339,7 +339,6 @@ public class Mapper {
 		systemInformationEntity.setCpuUtilizationPercentage(systemInformation.getCpuUtilizationPercentage());
 		systemInformationEntity.setDiskUsagePercentage(systemInformation.getDiskUsagePercentage());
 		systemInformationEntity.setHostName(systemInformation.getHostName());
-		systemInformationEntity.setId(systemInformation.getId());
 		systemInformationEntity.setIpAddress(systemInformation.getIpAddress());
 		systemInformationEntity.setMemoryUsagePercentage(systemInformation.getMemoryUsagePercentage());
 		systemInformationEntity.setNodeType(systemInformation.getNodeType());
@@ -352,9 +351,19 @@ public class Mapper {
 	public static List<SystemInformation> systemInformationEntityToModelList(
 			List<SystemInformationEntity> systemInformationEntities) {
 		List<SystemInformation> systemInformationList = new ArrayList<SystemInformation>();
-		for (SystemInformationEntity throughputEntity : systemInformationEntities) {
-			systemInformationList.add(systemInformationEntityToModel(throughputEntity));
+		for (SystemInformationEntity systemInformationEntity : systemInformationEntities) {
+			systemInformationList.add(systemInformationEntityToModel(systemInformationEntity));
 		}
 		return systemInformationList;
 	}
+
+	public static List<SystemInformationEntity> systemInformationModelToEntityList(
+			List<SystemInformation> systemInformation) {
+		List<SystemInformationEntity> systemInformationEntityList = new ArrayList<SystemInformationEntity>();
+		for (SystemInformation systemInfo : systemInformation) {
+			systemInformationEntityList.add(systemInformationModelToEntity(systemInfo));
+		}
+		return systemInformationEntityList;
+	}
+
 }

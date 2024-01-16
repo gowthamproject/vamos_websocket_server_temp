@@ -21,5 +21,7 @@ public class PDUSession {
 	private int msisdn;
 
 	private Date updatedTime;
+	
+	private long gnbId;
 
 }

@@ -42,4 +42,8 @@ public class Core5GService {
 		core5gRepository.save(core5gEntity);
 	}
 
+	public long getCore5GCount() {
+		return core5gRepository.count();
+	}
+
 }

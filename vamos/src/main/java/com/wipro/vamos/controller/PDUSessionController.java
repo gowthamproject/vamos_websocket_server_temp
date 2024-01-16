@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wipro.vamos.exception.ResourceNotFoundException;
@@ -21,15 +22,15 @@ public class PDUSessionController {
 	@Autowired
 	PDUSessionService pduSessionService;
 
-	@GetMapping(value = "/pdusession/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(value = "/pduSession/nodes/{core_id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public PDUSession getPDUSessionStatusByNodeId(@PathVariable(value = "core_id") String core_id)
 			throws ResourceNotFoundException {
 		return pduSessionService.getPDUSessionStatusByCoreId(core_id);
 	}
 
-	@PostMapping("/savePDUSession")
-	public ResponseEntity<String> savePduSession(@RequestBody PDUSession pduSession) {
-		pduSessionService.savePduSession(pduSession);
+	@PostMapping("/pduSession/savePDUSession")
+	public ResponseEntity<String> savePduSession(@RequestParam("core_id") String core_id, @RequestBody PDUSession pduSession) {
+		pduSessionService.savePduSession(core_id, pduSession);
 		return ResponseEntity.ok().body("PDUSession Added.!");
 	}
 }

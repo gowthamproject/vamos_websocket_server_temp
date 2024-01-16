@@ -23,7 +23,7 @@ public class Location {
 
 	private long zipcode;
 
-	private long latitude;
+	private double latitude;
 
-	private long longitude;
+	private double longitude;
 }

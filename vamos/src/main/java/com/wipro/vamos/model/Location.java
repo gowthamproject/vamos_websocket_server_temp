@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Location {
 
 	private int id;
-    
+
 	private String type;
 
 	private String street;
@@ -23,8 +23,8 @@ public class Location {
 
 	private long zipcode;
 
-	private long latitude;
+	private double latitude;
 
-	private long longitude;
+	private double longitude;
 
 }

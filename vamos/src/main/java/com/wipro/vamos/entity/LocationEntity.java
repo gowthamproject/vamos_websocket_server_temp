@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class LocationEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
 
@@ -42,10 +42,10 @@ public class LocationEntity {
 	private long zipcode;
 
 	@Column(name = "latitude", nullable = false)
-	private long latitude;
+	private double latitude;
 
 	@Column(name = "longitude", nullable = false)
-	private long longitude;
+	private double longitude;
 
 	@ManyToOne
 	@JoinColumn(name = "site_id")
